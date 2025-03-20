@@ -54,6 +54,9 @@ public final class GameManager {
 		// Set gamemode to survival
 		newWorld.setGameMode(GameMode.SURVIVAL);
 
+		// Set to hardcore
+		getCore().getMVWorldManager().getMVWorld(newWorldName).getCBWorld().setHardcore(true);
+
 		// Teleport all players to new world
 		for (Player player : Remain.getOnlinePlayers()) {
 
@@ -79,7 +82,7 @@ public final class GameManager {
 			player.setFireTicks(0);
 			player.clearActivePotionEffects();
 			player.heal(100);
-			player.setExp(0);
+			player.setTotalExperience(0);
 			player.setFoodLevel(20);
 
 			Remain.resetTitle(player);
@@ -94,6 +97,9 @@ public final class GameManager {
 
 		// Update the active game
 		activeGame = new ActiveGame(newWorld);
+
+		// Set the new world to be the new spawn world
+		getCore().getMVWorldManager().setFirstSpawnWorld(newWorldName);
 	}
 
 	private static String generateNewWorldName() {

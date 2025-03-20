@@ -117,7 +117,7 @@ public final class DeathCore extends SimplePlugin {
 						"&c&lYou Died", "");
 			else
 				Remain.sendTitle(player, 20, 30 * 20, 20,
-						"&c&l" + player.getName() + " died", "");
+						"&c&l" + hurtPlayer.getName() + " died", "");
 
 			// Send new world creation message
 			Common.tellNoPrefix(player, "&eCreating new world...");
