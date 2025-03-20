@@ -114,10 +114,10 @@ public final class DeathCore extends SimplePlugin {
 			// Send titles
 			if (player == hurtPlayer)
 				Remain.sendTitle(player, 20, 30 * 20, 20,
-						"&c&lYou Died", "&4stupid ass nigga");
+						"&c&lYou Died", "");
 			else
 				Remain.sendTitle(player, 20, 30 * 20, 20,
-						"&c&l" + player.getName() + " Died", "&4wat a retard");
+						"&c&l" + player.getName() + " died", "");
 
 			// Send new world creation message
 			Common.tellNoPrefix(player, "&eCreating new world...");

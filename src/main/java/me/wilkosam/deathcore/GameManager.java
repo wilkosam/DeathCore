@@ -11,9 +11,6 @@ import org.mineacademy.fo.remain.CompProperty;
 import org.mineacademy.fo.remain.CompSound;
 import org.mineacademy.fo.remain.Remain;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -89,9 +86,9 @@ public final class GameManager {
 		}
 
 		// Unload and remove old world from config
-		//TODO unless it's the default bukkit world
 		getCore().getMVWorldManager().unloadWorld(oldWorld.getName());
 		getCore().getMVWorldManager().removeWorldFromConfig(oldWorld.getName());
+
 
 		//TODO Move the old world folder into the backups folder and purge oldest backup if needed
 
@@ -102,43 +99,14 @@ public final class GameManager {
 	private static String generateNewWorldName() {
 
 		/*
-		Formatted as dd/mm/yyyy_mm-hh
-		For example: 19-03-2025_12-03
+		Formatted as dcWorld_dd/mm/yyyy_mm-hh
+		For example: dcWorld_9-03-2025_12-03
 		Determines when the world was created and gives it a unique identifier
 		 */
 
 		LocalDateTime now = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm");
 
-		return now.format(formatter);
-	}
-
-	private static void purgeOldestBackup() {
-
-	}
-
-	private static Path getPathToBackups() {
-		return DeathCore.getInstance().getDataPath().resolve("backups");
-	}
-
-	private static int countBackups() {
-
-		// Get the backups path
-		Path backupsPath = getPathToBackups();
-
-		// Check that the backups folder exists and that it is actually a folder
-		if (Files.exists(backupsPath) && Files.isDirectory(backupsPath)) {
-
-			// Count the number of subsequent folders that are inside it
-			try {
-				return (int) Files.list(backupsPath)
-						.filter(Files::isDirectory)
-						.count();
-			} catch (IOException e) {
-				return 0;
-			}
-		}
-
-		return 0;
+		return "dcWorld_" + now.format(formatter);
 	}
 }
